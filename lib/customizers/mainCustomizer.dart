@@ -34,8 +34,8 @@ Widget mainCustomizer(String whichPage, BuildContext context) {
           backgroundColor: Colors.white,
           appBar: appBarCustomizer("search", context),
           body: bodyCustomizer("search", context),
-          drawer: null,
-          bottomNavigationBar: null,
+          //drawer: drawerCustomizer("home", context),
+          //bottomNavigationBar: bottomNavigationBarCustomizer("home", context),
         )
     );
   }

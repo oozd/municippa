@@ -24,9 +24,9 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
     if(index == 1) {
 
       final ui.Size logicalSize = MediaQuery.of(context).size;
-      final double _width = logicalSize.width;
-      final double _height = logicalSize.height;
-      double _rectHeight = 48.0;
+      final double _width = MediaQuery.of(context).size.width;
+      final double _height = MediaQuery.of(context).size.height;
+      double _rectHeight = MediaQuery.of(context).size.width*.12;
       double top =  _height - _rectHeight;
       double left = _width;
 

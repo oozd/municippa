@@ -23,13 +23,13 @@ PopupMenu authMenu = PopupMenu(
         textStyle: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 10.0)
+            fontSize: 12)
     ),
     MenuItem(title: "Write About Something",
         textStyle: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 10.0)
+            fontSize: 12)
     ),
   ],
   onClickMenu: _onClick,
