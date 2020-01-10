@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:municippa/popup_menu.dart';
 import 'package:municippa/widgets/popupUnsigned.dart';
 import 'package:municippa/widgets/popupSigned.dart';
@@ -15,11 +18,11 @@ class HomeBottomNavigationBar extends StatefulWidget {
 
 class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
 
+  bool loggedIn = false;
+
   int _selectedItem = 0;
 
   _onItemTapped(int index) {
-
-
 
     if(index == 1) {
 
@@ -32,14 +35,25 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
 
       Rect myRect = Rect.fromLTRB( left, top, 0.0, 0.0 );
 
+      final user = Provider.of<FirebaseUser>(context);
       //TODO: according to the auth call authMenu or unauthMenu
       PopupMenu.context = context;
-      unauthMenu.show(rect: myRect);
+      loggedIn ? authMenu.show(rect: myRect) : unauthMenu.show(rect: myRect);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final user = Provider.of<FirebaseUser>(context);
+
+    if(user != null){
+      print("at home body ${user.email}");
+      loggedIn = true;
+    }
+    else{
+      loggedIn = false;
+    }
 
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,

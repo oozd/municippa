@@ -1,11 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:municippa/customizers/mainCustomizer.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SignIn extends StatelessWidget {
+
+import 'package:municippa/screens/signIn/signInAppBar.dart';
+import 'package:municippa/screens/signIn/signInBody.dart';
+
+class SignIn extends StatefulWidget {
+  @override
+  _SignInState createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
+
+  bool lockWidget;
+
   @override
   Widget build(BuildContext context) {
-    return mainCustomizer("signIn", context);
+    return IgnorePointer(
+      child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: SignInAppBar(),
+          body: SignInBody(notifyParent: lockParent),
+        ),
+      ),
+    );
   }
+
+  lockParent() {
+    setState( ()
+    {
+      lockWidget = !lockWidget;
+    }
+    );
+  }
+
 }

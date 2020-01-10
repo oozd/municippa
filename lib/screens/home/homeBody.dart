@@ -13,16 +13,20 @@ class HomeBody extends StatefulWidget {
 
 class _HomeBodyState extends State<HomeBody> {
 
+  bool loggedIn = false;
+
   @override
   Widget build(BuildContext context) {
 
-    print("home build");
-
     final user = Provider.of<FirebaseUser>(context);
 
-  if(user != null){
-    print(user.email);
-  }
+    if(user != null){
+      print("at home body ${user.email}");
+      loggedIn = true;
+    }
+    else{
+      loggedIn = false;
+    }
 
 
     return Column(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:municippa/customizers/mainCustomizer.dart';
 import 'package:municippa/services/sizeConfig.dart';
 
 

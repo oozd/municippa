@@ -10,19 +10,17 @@ class AuthService{
   }
 
   // Sign In Anon
-  Future signInAnon() async{
+  Future signInWithEmailAndPassword({String email, String password}) async {
 
     try{
-      AuthResult result = await _auth.signInAnonymously();
+      AuthResult result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
       return user;
     }
-    catch(e){
+    on Exception catch (e) {
       print(e.toString());
-      print("Problem With SignIn Anon");
       return null;
     }
-
   }
 
   // Register with email and password
@@ -49,12 +47,14 @@ class AuthService{
         await user.updateProfile(updateInfo);
       } on Exception catch (e) {
         print(e.toString());
+        return null;
       }
 
       try {
         await user.reload();
       } on Exception catch (e) {
         print(e.toString());
+        return null;
       }
 
       user = await _auth.currentUser();
@@ -71,6 +71,7 @@ class AuthService{
   // Sign Out
   Future signOut() async{
     try{
+      print("Signing Out");
       return await _auth.signOut();
     }
     catch(e){
@@ -80,7 +81,5 @@ class AuthService{
     }
 
   }
-
-
 
 }

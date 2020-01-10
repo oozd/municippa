@@ -13,103 +13,155 @@ class HomeDrawerAuth extends StatefulWidget {
 
 class _HomeDrawerAuthState extends State<HomeDrawerAuth> {
 
+
+  bool isSigningOut = false;
+
+
   final AuthService _auth = AuthService(); // create an authentication instance;
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox( // to set the drawer's width
-      width:  MediaQuery.of(context).size.width*.60,
-      child: Drawer(
-        child: Column(
-          // Important: Remove any padding from the ListView.
-          //padding: EdgeInsets.zero,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Container(
-                width:  MediaQuery.of(context).size.width*.60,
-                child: DrawerHeader(
-                  child: Column(
-                      children: <Widget>[
-                        Flexible(
-                          flex: 7,
-                          child: Center(
-                            child: SizedBox(
-                              child: Image.asset('packages/municippa/assets/images/logo.png'),
+    return IgnorePointer(
+      child: SizedBox( // to set the drawer's width
+        width:  MediaQuery.of(context).size.width*.60,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: Drawer(
+            child: Column(
+              // Important: Remove any padding from the ListView.
+              //padding: EdgeInsets.zero,
+              children: <Widget>[
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    width:  MediaQuery.of(context).size.width*.60,
+                    child: DrawerHeader(
+                      child: Column(
+                          children: <Widget>[
+                            Flexible(
+                              flex: 7,
+                              child: Center(
+                                child: SizedBox(
+                                  child: Image.asset('packages/municippa/assets/images/logo.png'),
+                                ),
+                              ),
                             ),
-                          ),
+
+                            SizedBox(
+                              height: 50,
+                            ),
+
+                            Flexible(
+                              flex: 1,
+                              child: SizedBox(
+                                child: Text("Welcome Message", style: TextStyle(fontSize: 12))),
+                            ),
+                            // TODO: Pass user name to welcome message.
+
+                          ]
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+
+
+                Expanded(
+                    flex:2,
+                    child: ListView(
+                      children: <Widget>[
+                        ListTile(
+                          title: Text('Home Page'),
+                          onTap: () {
+                            // Update the state of the app
+                            // ...
+                            // Then close the drawer
+                            Navigator.pop(context);
+                          },
                         ),
 
                         SizedBox(
-                          height: 50,
+                          height: 10,
                         ),
 
-                        Flexible(
-                          flex: 1,
-                          child: SizedBox(
-                            child: Text("Welcome Message", style: TextStyle(fontSize: 12))),
+
+                        ListTile(
+                          title: Text('Account Settings'),
+                          onTap: () {
+                            // Update the state of the app
+                            // ...
+                            // Then close the drawer
+
+                            //Navigator.pop(context);
+                          },
                         ),
-                        // TODO: Pass user name to welcome message.
 
-                      ]
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+                        SizedBox(
+                          height: 10,
+                        ),
 
+                        ListTile(
+                          title: Text('Sign Out'),
+                          onTap: () async {
 
-            Expanded(
-                flex:2,
-                child: ListView(
-                  children: <Widget>[
-                    ListTile(
-                      title: Text('Home Page'),
-                      onTap: () {
-                        // Update the state of the app
-                        // ...
-                        // Then close the drawer
-                        Navigator.pop(context);
-                      },
-                    ),
-
-                    SizedBox(
-                      height: 10,
-                    ),
+                            isSigningOut = true;
 
 
-                    ListTile(
-                      title: Text('Account Settings'),
-                      onTap: () {
-                        // Update the state of the app
-                        // ...
-                        // Then close the drawer
+                            isSigningOut ? Scaffold.of(context).showSnackBar( // if valid show a snackbar
+                                SnackBar(
+                                  content: Row(
+                                    children: <Widget>[
+                                      CircularProgressIndicator(),
+                                      Text("  Signing Out...")
+                                    ],
+                                  ),
+                                )
+                            )
+                                :
+                            null;
 
-                        //Navigator.pop(context);
-                      },
-                    ),
 
-                    SizedBox(
-                      height: 10,
-                    ),
+                            await _auth.signOut().whenComplete(
+                                () {
+                                  setState(() {
+                                    isSigningOut = false;
+                                  });
 
-                    ListTile(
-                      title: Text('Sign Out'),
-                      onTap: () async {
-                        await _auth.signOut(); // Sign out by using the created auth instance
-                      },
-                    ),
+                                }
+                            ); // Sign out by using the created auth instance
 
-                  ],
+
+
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  "Signed Out Successfully "
+                              ),
+                              duration: Duration(seconds: 1),
+                            ));
+
+                            await Future.delayed(const Duration(seconds: 1), (){});
+
+
+                            Navigator.popUntil(context, ModalRoute.withName('/home'));
+
+                          },
+
+
+                        ),
+
+                      ],
+                    )
                 )
-            )
 
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
+
 
 }

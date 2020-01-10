@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:municippa/services/formValidators.dart';
+import 'package:municippa/services/auth.dart';
 
 class SignInBody extends StatefulWidget {
+
+  final Function() notifyParent;
+  SignInBody({Key key, @required this.notifyParent}) : super(key: key);
 
   @override
   _SignInBodyState createState() => _SignInBodyState();
 }
 
 class _SignInBodyState extends State<SignInBody> {
+
+  bool isSigning = false;
+
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   String email = "";
   String password = "";
@@ -26,8 +35,6 @@ class _SignInBodyState extends State<SignInBody> {
 
   @override
   Widget build(BuildContext context) {
-
-    final _formKey = GlobalKey<FormState>();
 
     return GestureDetector(
       onTap: () {
@@ -57,7 +64,7 @@ class _SignInBodyState extends State<SignInBody> {
 
                     TextFormField(
                       controller: emailController,
-                      validator: emailValidator,
+                      validator: (val) => emailValidator(val.trimRight()),
                       autofocus: false,
                       obscureText: false,
                       keyboardType: TextInputType.emailAddress,
@@ -83,7 +90,7 @@ class _SignInBodyState extends State<SignInBody> {
 
                     TextFormField(
                       controller: passwordController,
-                      validator: nameValidator,
+                      validator: passwordValidator,
                       autofocus: false,
                       obscureText: true,
                       keyboardType: TextInputType.text,
@@ -107,22 +114,68 @@ class _SignInBodyState extends State<SignInBody> {
                     ),
 
                     ButtonTheme(
-                      //elevation: 4,
-                      //color: Colors.green,
-                      //minWidth: ,
                       child: MaterialButton(
+                        textColor: Colors.white,
+                        color: Colors.green,
+                        height: 30,
+                        child: Text("Sign In"),
+
                         onPressed: () async {
                           if(_formKey.currentState.validate()){ //if form is valid send to firebase.
                             print("validated Sign In Form");
+                            widget.notifyParent();
+
+                            isSigning = true;
+
+                            isSigning ? Scaffold.of(context).showSnackBar( // if valid show a snackbar
+                                SnackBar(
+                                  content: Row(
+                                    children: <Widget>[
+                                      CircularProgressIndicator(),
+                                      Text("  Signing In...")
+                                    ],
+                                  ),
+                                )
+                            )
+                                :
+                            null;
+
+                            dynamic user = await _auth.signInWithEmailAndPassword(
+                              email : emailController.text.trimRight(),
+                              password : passwordController.text,
+                            ).whenComplete(
+                                    () {
+                                  widget.notifyParent();
+                                  setState(() {
+                                    isSigning = false;
+                                  });
+                                }
+                            );
+
+                            if(user == null){
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text("Signing In Failed"),
+                                duration: Duration(seconds: 1),
+                              ));
+                            }
+                            else{
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                content: Text("Signed In ${user.displayName} Successfully "),
+                                duration: Duration(seconds: 1),
+                              ));
+
+                              await Future.delayed(const Duration(seconds: 1), (){});
+
+                              Navigator.popUntil(context, ModalRoute.withName('/home'));
+
+                            }
+
                           }
                           else{
                             print("notValidated Sign In Form");
                           }
                         },
-                        textColor: Colors.white,
-                        color: Colors.green,
-                        height: 30,
-                        child: Text("Sign In"),
+
                       ),
                     )
                   ],
