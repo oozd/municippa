@@ -140,35 +140,16 @@ class _SignInBodyState extends State<SignInBody> {
                                 :
                             null;
 
+
                             dynamic user = await _auth.signInWithEmailAndPassword(
                               email : emailController.text.trimRight(),
                               password : passwordController.text,
-                            ).whenComplete(
-                                    () {
-                                  widget.notifyParent();
-                                  setState(() {
-                                    isSigning = false;
-                                  });
-                                }
                             );
 
-                            if(user == null){
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text("Signing In Failed"),
-                                duration: Duration(seconds: 1),
-                              ));
-                            }
-                            else{
-                              Scaffold.of(context).showSnackBar(SnackBar(
-                                content: Text("Signed In ${user.displayName} Successfully "),
-                                duration: Duration(seconds: 1),
-                              ));
+                            showSnackBar(user);
 
-                              await Future.delayed(const Duration(seconds: 1), (){});
 
-                              Navigator.popUntil(context, ModalRoute.withName('/home'));
 
-                            }
 
                           }
                           else{
@@ -186,5 +167,49 @@ class _SignInBodyState extends State<SignInBody> {
         ),
       ),
     );
+  }
+
+  void showSnackBar(user) async {
+
+
+    await Future.delayed(const Duration(seconds: 1), (){});
+
+
+    print("user in SignIn: $user");
+    if(user == null){
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Signing In Failed"),
+        duration: Duration(seconds: 2),
+      ));
+
+
+      widget.notifyParent();
+      setState(() {
+        isSigning = false;
+      });
+
+    }
+    else{
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Signed In ${user.displayName} Successfully "),
+        duration: Duration(seconds: 2),
+      ));
+
+
+      await Future.delayed(const Duration(seconds: 3), (){});
+
+      widget.notifyParent();
+      setState(() {
+        isSigning = false;
+      });
+
+      await Future.delayed(const Duration(seconds: 1), (){});
+
+      Navigator.popUntil(context, ModalRoute.withName('/home'));
+
+    }
+
+
+
   }
 }

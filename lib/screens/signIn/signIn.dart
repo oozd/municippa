@@ -11,11 +11,12 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  bool lockWidget;
+  bool lockWidget = false;
 
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(
+      ignoring: lockWidget,
       child: DefaultTabController(
         length: 3,
         child: Scaffold(

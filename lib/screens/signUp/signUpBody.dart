@@ -320,6 +320,7 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
 
                               isRegistering = true;
 
+
                               isRegistering ? Scaffold.of(context).showSnackBar( // if valid show a snackbar
                                   SnackBar(
                                     content: Row(
@@ -333,44 +334,19 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
                                   :
                               null;
 
-                              dynamic user = await _auth.registerWithEmailAndPassword(
+                              dynamic user;
+
+                              user = await _auth.registerWithEmailAndPassword(
                                   name : nameController.text.trimRight(),
                                   surname : surnameController.text.trimRight(),
                                   identity : identityController.text.trimRight(),
                                   location : dropDown,
                                   email : emailController.text.trimRight(),
                                   password : passwordController.text,
-                              ).whenComplete(
-                                  () {
-                                    widget.notifyParent();
-                                    setState(() {
-                                      isRegistering = false;
-                                    });
-                                  }
                               );
 
-                              if(user == null){
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text("Registration Failed"),
-                                  duration: Duration(seconds: 1),
-                                ));
-                              }
-                              else{
+                              showSnackBar(user);
 
-
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                  content: Text(
-                                      "Registered ${user.displayName} Successfully "
-                                  ),
-                                  duration: Duration(seconds: 1),
-                                ));
-
-                                await Future.delayed(const Duration(seconds: 1), (){});
-
-
-                                Navigator.popUntil(context, ModalRoute.withName('/home'));
-
-                              }
                             }
 
                             else{ // Form is not validated
@@ -390,4 +366,48 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
       ),
     );
   }
+
+
+  void showSnackBar(user) async {
+
+    await Future.delayed(const Duration(seconds: 1), (){});
+
+    print("user in Signup: $user");
+    if(user == null){
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text("Registration Failed"),
+        duration: Duration(seconds: 2),
+      ));
+
+      widget.notifyParent();
+      setState(() {
+        isRegistering = false;
+      });
+    }
+    else{
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text(" ${user.displayName} Registered Successfully "),
+        duration: Duration(seconds: 2),
+      ));
+
+      await Future.delayed(const Duration(seconds: 3), (){});
+
+      widget.notifyParent();
+      setState(() {
+        isRegistering = false;
+      });
+
+
+      await Future.delayed(const Duration(seconds: 1), (){});
+
+
+
+      Navigator.popUntil(context, ModalRoute.withName('/home'));
+
+    }
+
+
+  }
+
+
 }

@@ -10,7 +10,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
 
-  bool lockWidget;
+  bool lockWidget = false;
 
 
   @override

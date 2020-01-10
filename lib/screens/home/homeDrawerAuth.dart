@@ -22,11 +22,10 @@ class _HomeDrawerAuthState extends State<HomeDrawerAuth> {
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(
+      ignoring: isSigningOut,
       child: SizedBox( // to set the drawer's width
         width:  MediaQuery.of(context).size.width*.60,
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: Drawer(
+          child: Drawer(
             child: Column(
               // Important: Remove any padding from the ListView.
               //padding: EdgeInsets.zero,
@@ -106,7 +105,10 @@ class _HomeDrawerAuthState extends State<HomeDrawerAuth> {
                           title: Text('Sign Out'),
                           onTap: () async {
 
-                            isSigningOut = true;
+                            setState(() {
+                              isSigningOut = true;
+                            });
+
 
 
                             isSigningOut ? Scaffold.of(context).showSnackBar( // if valid show a snackbar
@@ -124,27 +126,34 @@ class _HomeDrawerAuthState extends State<HomeDrawerAuth> {
 
 
                             await _auth.signOut().whenComplete(
-                                () {
-                                  setState(() {
-                                    isSigningOut = false;
-                                  });
+                                () async {
+
+
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text(
+                                        "Signed Out Successfully "
+                                    ),
+                                    duration: Duration(seconds: 1),
+                                  ));
+
+                                  await Future.delayed(const Duration(seconds: 4), (){});
+
+
+
+
+                                  if(mounted){
+                                    setState(() {
+                                      isSigningOut = false;
+                                    });
+                                  }
+
+
+                                  await Future.delayed(const Duration(seconds: 2), (){});
+
+                                  Navigator.popUntil(context, ModalRoute.withName('/home'));
 
                                 }
                             ); // Sign out by using the created auth instance
-
-
-
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                  "Signed Out Successfully "
-                              ),
-                              duration: Duration(seconds: 1),
-                            ));
-
-                            await Future.delayed(const Duration(seconds: 1), (){});
-
-
-                            Navigator.popUntil(context, ModalRoute.withName('/home'));
 
                           },
 
@@ -158,7 +167,6 @@ class _HomeDrawerAuthState extends State<HomeDrawerAuth> {
               ],
             ),
           ),
-        ),
       ),
     );
   }
