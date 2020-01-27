@@ -26,5 +26,12 @@ final passwordValidator = MultiValidator([
     //PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
   ]);
 
+final titleValidator = MultiValidator([
+  RequiredValidator(errorText: 'Title is required'),
+]);
+
+final postValidator = MultiValidator([
+  RequiredValidator(errorText: 'Write Something About Your Post'),
+]);
 
 

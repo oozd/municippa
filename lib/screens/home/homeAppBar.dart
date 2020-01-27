@@ -28,7 +28,7 @@ class _HomeAppBarState extends State<HomeAppBar> {
             flex: 1,
             child: FittedBox(
               child: IconButton(
-                  icon: Icon(Icons.account_circle, color: Colors.black) , onPressed: () => Scaffold.of(context).openDrawer()
+                  icon: Icon(Icons.account_circle, color: Colors.blue) , onPressed: () => Scaffold.of(context).openDrawer()
               ),
             ),
           ),

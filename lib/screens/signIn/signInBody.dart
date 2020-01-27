@@ -81,7 +81,9 @@ class _SignInBodyState extends State<SignInBody> {
                               borderSide: BorderSide(
                                   width: 1,
                                   color: Colors.green,
-                                  style: BorderStyle.solid))),
+                                  style: BorderStyle.solid)
+                          )
+                      ),
                     ),
 
                     SizedBox(
@@ -106,7 +108,9 @@ class _SignInBodyState extends State<SignInBody> {
                               borderSide: BorderSide(
                                   width: 1,
                                   color: Colors.green,
-                                  style: BorderStyle.solid))),
+                                  style: BorderStyle.solid)
+                          )
+                      ),
                     ),
 
                     SizedBox(
@@ -116,7 +120,7 @@ class _SignInBodyState extends State<SignInBody> {
                     ButtonTheme(
                       child: MaterialButton(
                         textColor: Colors.white,
-                        color: Colors.green,
+                        color: Colors.blue,
                         height: 30,
                         child: Text("Sign In"),
 

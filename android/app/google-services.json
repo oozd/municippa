@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "695851226825",
+    "firebase_url": "https://municippa.firebaseio.com",
+    "project_id": "municippa",
+    "storage_bucket": "municippa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695851226825:android:fc27f8e576f1e38c4bdf18",
+        "android_client_info": {
+          "package_name": "com.minimalfruit.municippa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695851226825-nd8jgaqjfj9qu1470l4j6362lu755bsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBUHkDWyDvFmXmm3U_CwB0zQ2aMH1BmWw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695851226825-nd8jgaqjfj9qu1470l4j6362lu755bsb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

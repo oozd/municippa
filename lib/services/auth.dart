@@ -5,6 +5,7 @@ class AuthService{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  // For Provider
   Stream<FirebaseUser> get user { // It will be a User or Null
     return _auth.onAuthStateChanged;
   }
@@ -41,6 +42,9 @@ class AuthService{
         'isEmailVerified': user.isEmailVerified,// TODO: Email Verification
         'location': location,
         'photoUrl': user.photoUrl,
+        'posts' : {},
+        'votes' : {},
+
       });
 
       try {

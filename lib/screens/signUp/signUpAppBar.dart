@@ -22,7 +22,7 @@ class _SignUpAppBarState extends State<SignUpAppBar> {
         onPressed:() => Navigator.popUntil(context, ModalRoute.withName('/home')),
       ),
       backgroundColor: Colors.white,
-      title: Container(padding: EdgeInsets.only(left : 60.0), child: Text("Sign Up", style: TextStyle(color: Colors.black))),
+      title: Container(child: Text("Sign Up", style: TextStyle(color: Colors.black))),
     );
   }
 }

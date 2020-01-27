@@ -5,8 +5,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:municippa/screens/home/home.dart';
 
 
-
-
 class SignUpBody extends StatefulWidget {
 
   final Function() notifyParent;
@@ -16,7 +14,7 @@ class SignUpBody extends StatefulWidget {
   _SignUpBodyState createState() => _SignUpBodyState();
 }
 
-class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
+class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir. but why?
 
   bool isRegistering = false;
 
@@ -100,7 +98,9 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
                                 borderSide: BorderSide(
                                     width: 1,
                                     color: Colors.green,
-                                    style: BorderStyle.solid))),
+                                    style: BorderStyle.solid)
+                            )
+                        ),
                       ),
 
                       SizedBox(
@@ -157,7 +157,9 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
                                 borderSide: BorderSide(
                                     width: 1,
                                     color: Colors.green,
-                                    style: BorderStyle.solid))),
+                                    style: BorderStyle.solid)
+                            )
+                        ),
                       ),
 
                       SizedBox(
@@ -183,7 +185,9 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
                                 borderSide: BorderSide(
                                     width: 1,
                                     color: Colors.green,
-                                    style: BorderStyle.solid))),
+                                    style: BorderStyle.solid)
+                            )
+                        ),
                       ),
 
                       SizedBox(
@@ -209,7 +213,9 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
                                 borderSide: BorderSide(
                                     width: 1,
                                     color: Colors.green,
-                                    style: BorderStyle.solid))),
+                                    style: BorderStyle.solid)
+                            )
+                        ),
                       ),
 
                       SizedBox(
@@ -244,7 +250,9 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
                                 borderSide: BorderSide(
                                     width: 1,
                                     color: Colors.green,
-                                    style: BorderStyle.solid))),
+                                    style: BorderStyle.solid)
+                            )
+                        ),
                       ),
 
                       SizedBox(
@@ -310,7 +318,7 @@ class _SignUpBodyState extends State<SignUpBody> { // TODO: app barı birleştir
                         child: MaterialButton(
 
                           textColor: Colors.white,
-                          color: Colors.green,
+                          color: Colors.blue,
                           height: 30,
                           child: Text("Sign Up"),
 

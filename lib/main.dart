@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamProvider<FirebaseUser>.value(
     value: AuthService().user,
-      child: MaterialApp(
+    child: MaterialApp(
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white
+    ),
 
         routes: {
         '/home': (context) => Home(),

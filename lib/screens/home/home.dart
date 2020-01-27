@@ -36,7 +36,6 @@ class Home extends StatelessWidget {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
-          backgroundColor: Colors.white,
 
           appBar: HomeAppBar(),
 

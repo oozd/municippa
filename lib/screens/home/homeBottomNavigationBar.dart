@@ -35,7 +35,7 @@ class _HomeBottomNavigationBarState extends State<HomeBottomNavigationBar> {
 
       Rect myRect = Rect.fromLTRB( left, top, 0.0, 0.0 );
 
-      final user = Provider.of<FirebaseUser>(context);
+      final user = Provider.of<FirebaseUser>(context, listen: false);
       //TODO: according to the auth call authMenu or unauthMenu
       PopupMenu.context = context;
       loggedIn ? authMenu.show(rect: myRect) : unauthMenu.show(rect: myRect);

@@ -22,7 +22,7 @@ class _SignInAppBarState extends State<SignInAppBar> {
 
       ),
       backgroundColor: Colors.white,
-      title: Container(padding: EdgeInsets.only(left : 60.0), child: Text("Sign In", style: TextStyle(color: Colors.black))),
+      title: Container(child: Text("Sign In", style: TextStyle(color: Colors.black))),
     );
   }
 }
