@@ -11,12 +11,12 @@ import 'package:municippa/services/db.dart';
 class ImagePreview extends StatefulWidget {
 
 
-  final String dropDown;
+  final String location;
   final String title;
   final String post;
   final File image;
 
-  const ImagePreview({Key key, this.dropDown, this.title, this.post, this.image}) : super(key: key);
+  const ImagePreview({Key key, this.location, this.title, this.post, this.image}) : super(key: key);
 
 
 
@@ -57,201 +57,214 @@ class _ImagePreviewState extends State<ImagePreview> {
             backgroundColor: Colors.white,
           ),
 
-          body: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 8,
-                child: Card(
-                  margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  color: Colors.white,
-                  child: Column(
-                      children: <Widget>[
-                        Expanded(
-                          flex:18, // for top of the card vs button
+          body: GestureDetector(
+            onTap: () {
+              FocusScope.of(context)
+                  .requestFocus(new FocusNode()); //tap outside takes focus out
+            },
+            child: Column(
+              children: <Widget>[
+                Expanded(
+                  flex: 8,
+                  child: Card(
+                    margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                    color: Colors.white,
+                    child: Column(
+                        children: <Widget>[
+                          Expanded(
+                            flex:18, // for top of the card vs button
 
-                          child: Column(
+                            child: Column(
 
-                            children: <Widget>[
+                              children: <Widget>[
 
-                              Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    flex:4, // for icon vs right side of it.
-                                    child: FittedBox(
-                                        child: Icon(Icons.account_circle, color: Colors.blue,)
+                                Row(
+                                  children: <Widget>[
+                                    Expanded(
+                                      flex:4, // for icon vs right side of it.
+                                      child: FittedBox(
+                                          child: Icon(Icons.account_circle, color: Colors.blue,)
+                                      ),
                                     ),
-                                  ),
 
-                                  Expanded(
-                                    flex: 30,
-                                    child: Container(
-                                      child: Text("Posted By ${user.displayName} "),
+                                    Expanded(
+                                      flex: 30,
+                                      child: Container(
+                                        child: Text("Posted By ${user.displayName} "),
+                                      ),
                                     ),
-                                  ),
 
-                                  Spacer(flex: 30),
+                                    Spacer(flex: 30),
 
-                                  Expanded(
-                                    flex: 18,
-                                    child: Text(formattedDate)
-                                  ),
-
-                                ],
-
-
-                              ),
-
-                              Row(
-                                children: <Widget>[
-
-                                  Spacer(flex: 45),
-
-                                  Expanded(
-                                    flex:3, // for icon vs right side of it.
-                                    child: FittedBox(
-                                        child: Icon(Icons.location_on, color: Colors.blue,)
+                                    Expanded(
+                                      flex: 18,
+                                      child: Text(formattedDate)
                                     ),
-                                  ),
 
-                                  Expanded(
-                                    flex: 10,
-                                    child: Container(
-                                      child: Text("At ${widget.dropDown} "),
+                                  ],
+
+
+                                ),
+
+                                Row(
+                                  children: <Widget>[
+
+                                    Spacer(flex: 45),
+
+                                    Expanded(
+                                      flex:3, // for icon vs right side of it.
+                                      child: FittedBox(
+                                          child: Icon(Icons.location_on, color: Colors.blue,)
+                                      ),
                                     ),
-                                  ),
 
-                                ],
-
-                              ),
-
-
-                              SizedBox(
-                                height: 10,
-                              ),
-
-                              Center(
-                                  child: Text(
-                                    widget.title,
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold
+                                    Expanded(
+                                      flex: 10,
+                                      child: Container(
+                                        child: Text("At ${widget.location} "),
+                                      ),
                                     ),
-                                  )
-                              ),
+
+                                  ],
+
+                                ),
 
 
-                              SizedBox(
-                                height: 10,
-                              ),
+                                SizedBox(
+                                  height: 10,
+                                ),
 
-                              Expanded(flex:6, child: Image.file(widget.image)),
-
-                              //Image.file(widget.image),
-
-
-                              SizedBox(
-                                height: 10,
-                              ),
-
-                              Container(
-                                alignment: Alignment(-0.8, 0),
-                                  margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                  child: Text(widget.post, style: TextStyle(fontSize: 14),)),
-
-                              SizedBox(
-                                height: 10,
-                              ),
+                                Center(
+                                    child: Text(
+                                      widget.title,
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold
+                                      ),
+                                    )
+                                ),
 
 
-                            ],
+                                SizedBox(
+                                  height: 10,
+                                ),
+
+                                Expanded(flex:6, child: Image.file(widget.image)),
+
+                                //Image.file(widget.image),
+
+
+                                SizedBox(
+                                  height: 10,
+                                ),
+
+                                Container(
+                                  alignment: Alignment(-0.8, 0),
+                                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                    child: Text(widget.post, style: TextStyle(fontSize: 14),)),
+
+                                SizedBox(
+                                  height: 10,
+                                ),
+
+
+                              ],
+                            ),
                           ),
-                        ),
 
 
 
 
 
-                      ]
+                        ]
+                    ),
                   ),
                 ),
-              ),
 
-              SizedBox(
-                height: 10,
-              ),
+                SizedBox(
+                  height: 10,
+                ),
 
-              ButtonBar(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Container(
-                    //padding: EdgeInsets.fromLTRB(0, 100, 100, 100),
-                    margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                    //height: 40,
-                    child: ButtonTheme(
-                      child: MaterialButton(
-                        textColor: Colors.white,
-                        color: Colors.redAccent,
-                        child: Text("Back To Editting"),
+                ButtonBar(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      //padding: EdgeInsets.fromLTRB(0, 100, 100, 100),
+                      margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      //height: 40,
+                      child: ButtonTheme(
+                        child: MaterialButton(
+                          textColor: Colors.white,
+                          color: Colors.redAccent,
+                          child: Text("Back To Editting"),
 
-                        onPressed: () {
-                          Navigator.pop(context);
+                          onPressed: () {
+                            Navigator.pop(context);
 
-                        },
+                          },
+                        ),
                       ),
                     ),
-                  ),
 
-                  Container(
-                    //padding: EdgeInsets.fromLTRB(0, 100, 100, 100),
-                    margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                    //height: 40,
-                    child: ButtonTheme(
-                      child: MaterialButton(
-                        textColor: Colors.white,
-                        color: Colors.blue,
-                        child: Text("All Is Well"),
+                    Container(
+                      //padding: EdgeInsets.fromLTRB(0, 100, 100, 100),
+                      margin: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                      //height: 40,
+                      child: ButtonTheme(
+                        child: MaterialButton(
+                          textColor: Colors.white,
+                          color: Colors.blue,
+                          child: Text("All Is Well"),
 
-                        onPressed: () async{
+                          onPressed: () async{
 
-                          final user = Provider.of<FirebaseUser>(context, listen: false); // get the user here.
+                            final user = Provider.of<FirebaseUser>(context, listen: false); // get the user here.
 
-                          if(user != null) {
-                            print("User ${user.displayName} Sending Image Post");
-                            await _db.imageUpload(widget.image);
-
-                          }
-
-                          else{
-                            print("Cannot Retrieve User at Image Preview");
-                            Scaffold.of(context).showSnackBar( // if valid show a snackbar
-                                SnackBar(
-                                  content: Row(
-                                    children: <Widget>[
-                                      CircularProgressIndicator(),
-                                      Text("  Authentication Failed, Cannot Send Posts...")
-                                    ],
-                                  ),
-                                )
-                            );
-                          }
+                            if(user != null) {
+                              print("User ${user.displayName} Sending Image Post");
+                              await _db.imageUpload(
+                                image : widget.image,
+                                user: user,
+                                title: widget.title.trimRight(),
+                                post: widget.post.trimRight(),
+                                location: widget.location,
+                              );
 
 
+                            }
+
+                            else{
+                              print("Cannot Retrieve User at Image Preview");
+                              Scaffold.of(context).showSnackBar( // if valid show a snackbar
+                                  SnackBar(
+                                    content: Row(
+                                      children: <Widget>[
+                                        CircularProgressIndicator(),
+                                        Text("  Authentication Failed, Cannot Send Posts...")
+                                      ],
+                                    ),
+                                  )
+                              );
+                            }
 
 
-                        },
+
+
+                          },
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
 
-              SizedBox(
-                height: 10,
-              ),
-
+                SizedBox(
+                  height: 10,
+                ),
 
 
-            ],
+
+              ],
+            ),
           )
 
       );

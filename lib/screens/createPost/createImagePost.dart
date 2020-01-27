@@ -77,8 +77,8 @@ class _CreateImagePostState extends State<CreateImagePost> {
 
         body: GestureDetector( // if all is valid show the preview of the post
             onTap: () {
-              FocusScope.of(context)
-                  .requestFocus(new FocusNode()); //tap outside takes focus out
+              FocusScope.of(context).requestFocus(new FocusNode());//tap outside takes focus out
+              //there is a tab bug. Issue is still open at github. not a big problem.
             },
             child: Form(
               key: _formKey,
@@ -264,7 +264,7 @@ class _CreateImagePostState extends State<CreateImagePost> {
                          print( "form validated and there is a picture");
 
                          Navigator.push(context, MaterialPageRoute(builder: (context) => ImagePreview(
-                           dropDown : dropDown,
+                           location : dropDown,
                            title: titleController.text,
                            post: postController.text,
                            image: _image,
