@@ -42,8 +42,7 @@ class AuthService{
         'isEmailVerified': user.isEmailVerified,// TODO: Email Verification
         'location': location,
         'photoUrl': user.photoUrl,
-        'posts' : {},
-        'votes' : {},
+        'posts' : [],
 
       });
 

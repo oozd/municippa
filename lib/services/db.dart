@@ -25,7 +25,7 @@ class DbService{
 
       StorageTaskSnapshot taskSnapshot = await uploadTask.onComplete;
 
-      taskSnapshot.ref.getDownloadURL().then( (downloadURL) {
+      taskSnapshot.ref.getDownloadURL().then((downloadURL) {
         print("Image Uploaded successfully");
       });
 
@@ -39,12 +39,32 @@ class DbService{
         'upVote' : 1,
         'downVote' : 0,
         'absVote' : 0,
+        'votedBy' : [user.uid], // list of users who voted the post.
 
       });
 
-      print("Post is written successfully");
+      print("Post is written to posts collection");
 
-      
+      var userCollectionRef = Firestore.instance.collection("users").document(user.uid);
+
+
+      var list = List<String>();
+      list.add(imageId);
+
+      userCollectionRef.updateData({
+        'posts' : FieldValue.arrayUnion(list),
+      });
+
+      userCollectionRef.collection("votes").document(imageId).setData({
+      'vote' : 1,
+      });
+
+
+
+      print("Users document is updated successfully");
+
+
+
 
 
 
