@@ -42,7 +42,7 @@ class AuthService{
         'isEmailVerified': user.isEmailVerified,// TODO: Email Verification
         'location': location,
         'photoUrl': user.photoUrl,
-        'posts' : [],
+        // posts and votes subCollections are created when sending or voting a post.
 
       });
 
