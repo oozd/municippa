@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:municippa/popup_menu.dart';
-import 'package:municippa/screens/signIn/signIn.dart';
-import 'package:municippa/screens/createPost/createImagePost.dart';
-import 'package:municippa/screens/createPost/createTextPost.dart';
-import 'package:municippa/screens/createPost/createVideoPost.dart';
+import 'package:municippa/screens/sign_in/sign_in.dart';
+import 'package:municippa/screens/createPost/create_image_post.dart';
+import 'package:municippa/screens/createPost/create_text_post.dart';
+import 'package:municippa/screens/createPost/create_video_post.dart';
 
 
 _onClick(MenuItemProvider item){

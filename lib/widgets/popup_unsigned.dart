@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:municippa/popup_menu.dart';
-import 'package:municippa/screens/signUp/signUp.dart';
-import 'package:municippa/screens/signIn/signIn.dart';
+import 'package:municippa/screens/sign_up/sign_up.dart';
+import 'package:municippa/screens/sign_in/sign_in.dart';
 
 _onClick(MenuItemProvider item){
   if(item.menuTitle == "Sign Up"){

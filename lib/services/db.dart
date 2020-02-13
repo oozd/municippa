@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'dart:io';
 import 'package:uuid/uuid.dart';
-import 'package:municippa/posts/imagePost.dart';
+import 'package:municippa/posts/image_post.dart';
 import 'package:municippa/services/auth.dart';
 import 'package:flutter/material.dart';
 

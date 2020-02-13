@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:municippa/screens/search/searchAppBar.dart';
-import 'package:municippa/screens/search/searchBody.dart';
+import 'package:municippa/screens/search/search_app_bar.dart';
+import 'package:municippa/screens/search/search_body.dart';
 
 class Search extends StatelessWidget {
   @override

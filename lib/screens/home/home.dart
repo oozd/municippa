@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:municippa/services/sizeConfig.dart';
+import 'package:municippa/services/size_config.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:municippa/screens/home/homeAppBar.dart';
-import 'package:municippa/screens/home/homeBody.dart';
-import 'package:municippa/screens/home/homeDrawerAuth.dart';
-import 'package:municippa/screens/home/homeDrawerUnauth.dart';
-import 'package:municippa/screens/home/homeBottomNavigationBar.dart';
+import 'package:municippa/screens/home/home_app_bar.dart';
+import 'package:municippa/screens/home/home_body.dart';
+import 'package:municippa/screens/home/home_drawer_auth.dart';
+import 'package:municippa/screens/home/home_drawer_unauth.dart';
+import 'package:municippa/screens/home/home_bottom_navigation_bar.dart';
 
 
 // Bottom navigation bar acts different according to the users auth state.

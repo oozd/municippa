@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:municippa/screens/signUp/signUpAppBar.dart';
-import 'package:municippa/screens/signUp/signUpBody.dart';
+import 'package:municippa/screens/sign_up/sign_up_app_bar.dart';
+import 'package:municippa/screens/sign_up/sign_up_body.dart';
 
 class SignUp extends StatefulWidget {
   @override

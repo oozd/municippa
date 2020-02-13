@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municippa/screens/popular/popularBody.dart';
+import 'package:municippa/screens/popular/popular_body.dart';
 
 class Popular extends StatelessWidget {
   @override

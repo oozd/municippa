@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:municippa/services/formValidators.dart';
-import 'package:municippa/screens/createPost/textPreview.dart';
+import 'package:municippa/services/form_validators.dart';
+import 'package:municippa/screens/createPost/text_preview.dart';
 
 class CreateTextPost extends StatefulWidget {
   @override

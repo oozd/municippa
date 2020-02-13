@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:municippa/screens/popular/popular.dart';
 import 'package:municippa/screens/recent/recent.dart';
-import 'package:municippa/screens/nearMe/nearMe.dart';
+import 'package:municippa/screens/near_me/near_me.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:municippa/services/sizeConfig.dart';
+import 'package:municippa/services/size_config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:municippa/services/db.dart';
 

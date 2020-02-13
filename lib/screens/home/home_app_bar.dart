@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:municippa/screens/search/search.dart';
-import 'package:municippa/services/sizeConfig.dart';
+import 'package:municippa/services/size_config.dart';
 
 
 

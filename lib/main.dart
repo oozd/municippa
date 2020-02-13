@@ -5,8 +5,8 @@ import 'package:municippa/services/auth.dart';
 
 import 'package:municippa/screens/home/home.dart';
 import 'package:municippa/screens/search/search.dart';
-import 'package:municippa/screens/signUp/signUp.dart';
-import 'package:municippa/screens/signIn/signIn.dart';
+import 'package:municippa/screens/sign_up/sign_up.dart';
+import 'package:municippa/screens/sign_in/sign_in.dart';
 
 void main() => runApp(MyApp());
 

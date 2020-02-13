@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:municippa/services/sizeConfig.dart';
+import 'package:municippa/services/size_config.dart';
 
 
 class SearchAppBar extends StatefulWidget implements PreferredSizeWidget{

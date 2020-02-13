@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:municippa/screens/createPost/imagePreview.dart';
+import 'package:municippa/screens/createPost/image_preview.dart';
 
-import 'package:municippa/services/formValidators.dart';
+import 'package:municippa/services/form_validators.dart';
 
 import 'dart:async';
 import 'dart:io';

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:municippa/posts/imagePost.dart';
+import 'package:municippa/posts/image_post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:municippa/models/models.dart';

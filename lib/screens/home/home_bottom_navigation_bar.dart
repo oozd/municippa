@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:municippa/popup_menu.dart';
-import 'package:municippa/widgets/popupUnsigned.dart';
-import 'package:municippa/widgets/popupSigned.dart';
-import 'package:municippa/services/sizeConfig.dart';
+import 'package:municippa/widgets/popup_unsigned.dart';
+import 'package:municippa/widgets/popup_signed.dart';
+import 'package:municippa/services/size_config.dart';
 import 'dart:ui' as ui;
 
 
