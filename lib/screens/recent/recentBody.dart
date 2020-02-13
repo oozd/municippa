@@ -10,7 +10,6 @@ class RecentBody extends StatefulWidget {
 }
 
 
-
 class _RecentBodyState extends State<RecentBody> {
 
   final _scrollController = ScrollController();
@@ -46,16 +45,20 @@ class _RecentBodyState extends State<RecentBody> {
               child: Text('no posts'),
             );
           }
-          return ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return index >= state.posts.length
-                  ? BottomLoader()
-                  : PostWidget(imagePost: state.posts[index]);
-            },
-            itemCount: state.hasReachedMax
-                ? state.posts.length
-                : state.posts.length + 1,
-            controller: _scrollController,
+          return RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(), // otherwise refreshIndicator does not work
+              itemBuilder: (BuildContext context, int index) {
+                return index >= state.posts.length
+                    ? BottomLoader()
+                    : PostWidget(imagePost: state.posts[index]);
+              },
+              itemCount: state.hasReachedMax
+                  ? state.posts.length
+                  : state.posts.length + 1,
+              controller: _scrollController,
+            ),
           );
         }
       },
@@ -76,120 +79,11 @@ class _RecentBodyState extends State<RecentBody> {
     }
   }
 
-
-
-
-  Widget buildRows(ImagePost imagePost) {
-    /* return CachedNetworkImage(
-        placeholder: (context, url) => CircularProgressIndicator(),
-        imageUrl: imagePost.imageURL
-    );*/
-
-    return Card(
-      margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-      color: Colors.white,
-      child: Column(
-        children: <Widget>[
-
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex:4, // for icon vs right side of it.
-                child: FittedBox(
-                    child: Icon(Icons.account_circle, color: Colors.blue,)
-                ),
-              ),
-
-              Expanded(
-                flex: 30,
-                child: Container(
-                  child: Text("Posted By "),
-                ),
-              ),
-
-              Spacer(flex: 30),
-
-              Expanded(
-                  flex: 18,
-                  child: Text("Date")
-              ),
-
-            ],
-
-
-          ),
-
-          Row(
-            children: <Widget>[
-
-              Spacer(flex: 45),
-
-              Expanded(
-                flex:3, // for icon vs right side of it.
-                child: FittedBox(
-                    child: Icon(Icons.location_on, color: Colors.blue,)
-                ),
-              ),
-
-              Expanded(
-                flex: 10,
-                child: Container(
-                  child: Text("At ${imagePost.location} "),
-                ),
-              ),
-
-            ],
-
-          ),
-
-
-          SizedBox(
-            height: 10,
-          ),
-
-          Center(
-              child: Text(
-                imagePost.title,
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                ),
-              )
-          ),
-
-
-          SizedBox(
-            height: 10,
-          ),
-
-          CachedNetworkImage(
-            //TODO: buraya boş image ver ama size'lı mize'lı ver ki yeri dolsun.
-            // bi de en başta yüklenirken spinkit gibi bir şey koy.
-            //bi de loading'i hallet bitti.
-
-            placeholder: (context, url) => Image.asset('packages/municippa/assets/images/blank.jpg', height: 800, width: 800),
-            imageUrl: imagePost.imageURL,
-          ),
-
-
-          SizedBox(
-            height: 10,
-          ),
-
-          Container(
-              alignment: Alignment(-0.8, 0),
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-              child: Text(imagePost.post, style: TextStyle(fontSize: 14),)),
-
-          SizedBox(
-            height: 10,
-          ),
-
-
-        ],
-      ),
-    );
+  Future<void> _onRefresh() async {
+    _postBloc.add(Refresh());
+    return ;
   }
+
 
 }
 
