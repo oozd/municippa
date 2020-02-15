@@ -17,32 +17,32 @@ class _RecentBodyState extends State<RecentBody> {
 
   final _scrollController = ScrollController();
   final _scrollThreshold = 200.0;
-  PostBloc _postBloc;
+  RecentPostBloc _postBloc;
 
   @override
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    _postBloc = BlocProvider.of<PostBloc>(context);
+    _postBloc = BlocProvider.of<RecentPostBloc>(context);
   }
 
 
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PostBloc, PostState>(
+    return BlocBuilder<RecentPostBloc, RecentPostState>(
       builder: (context, state) {
-        if (state is PostUninitialized) {
+        if (state is RecentPostUninitialized) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
-        if (state is PostError) {
+        if (state is RecentPostError) {
           return Center(
             child: Text('failed to fetch posts'),
           );
         }
-        if (state is PostLoaded) {
+        if (state is RecentPostLoaded) {
           if (state.posts.isEmpty) {
             return Center(
               child: Text('no posts'),
@@ -78,12 +78,12 @@ class _RecentBodyState extends State<RecentBody> {
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.position.pixels;
     if (maxScroll - currentScroll <= _scrollThreshold) {
-      _postBloc.add(Fetch());
+      _postBloc.add(FetchRecent());
     }
   }
 
   Future<void> _onRefresh() async {
-    _postBloc.add(Refresh());
+    _postBloc.add(RefreshRecent());
     await new Future.delayed(const Duration(seconds : 2));
     return ;
   }

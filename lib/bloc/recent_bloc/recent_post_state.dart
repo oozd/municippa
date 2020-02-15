@@ -4,37 +4,37 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 //import 'package:municippa/models/models.dart';
 
-abstract class PostState extends Equatable {
-  const PostState();
+abstract class RecentPostState extends Equatable {
+  const RecentPostState();
 
   @override
   List<Object> get props => [];
 }
 
-class PostUninitialized extends PostState {
+class RecentPostUninitialized extends RecentPostState {
 }
 
-class PostError extends PostState {
+class RecentPostError extends RecentPostState {
 }
 
-class PostLoaded extends PostState {
+class RecentPostLoaded extends RecentPostState {
   final List<ImagePost> posts;
   final bool hasReachedMax;
   final DocumentSnapshot lastDoc;
 
-  const PostLoaded({
+  const RecentPostLoaded({
     this.posts,
     this.hasReachedMax,
     this.lastDoc,
   });
 
-  PostLoaded copyWith({
+  RecentPostLoaded copyWith({
     List<ImagePost> posts,
     bool hasReachedMax,
     DocumentSnapshot lastDoc,
 
   }) {
-    return PostLoaded(
+    return RecentPostLoaded(
       posts: posts ?? this.posts,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
       lastDoc: lastDoc ?? this.lastDoc,
@@ -46,5 +46,5 @@ class PostLoaded extends PostState {
 
   @override
   String toString() =>
-      'PostLoaded { posts: ${posts.length}, hasReachedMax: $hasReachedMax, lastDoc: $lastDoc}';
+      'RecentPostLoaded { posts: ${posts.length}, hasReachedMax: $hasReachedMax, lastDoc: $lastDoc}';
 }

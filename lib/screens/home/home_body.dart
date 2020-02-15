@@ -29,9 +29,19 @@ class _HomeBodyState extends State<HomeBody>
     final user = Provider.of<FirebaseUser>(context);
     //TODO: check user state
 
-    return BlocProvider(
-      create: (context) =>
-      PostBloc(db: DbService())..add(Fetch()),
+    return MultiBlocProvider(
+      providers: [
+
+        BlocProvider<RecentPostBloc>(
+          create: (context) =>
+          RecentPostBloc(db: DbService())..add(FetchRecent()),
+        ),
+
+        BlocProvider<PopularPostBloc>(
+          create: (context) =>
+          PopularPostBloc(db: DbService())..add(FetchPopular()),
+        )
+      ],
 
       child: Column(
         children: <Widget>[

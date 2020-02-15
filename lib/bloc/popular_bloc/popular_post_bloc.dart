@@ -7,15 +7,15 @@ import 'package:municippa/bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class PostBloc extends Bloc<PostEvent, PostState> {
+class PopularPostBloc extends Bloc<PopularPostEvent, PopularPostState> {
   final DbService db;
 
-  PostBloc({@required this.db});
+  PopularPostBloc({@required this.db});
 
   @override
-  Stream<PostState> transformEvents(
-      Stream<PostEvent> events,
-      Stream<PostState> Function(PostEvent event) next,
+  Stream<PopularPostState> transformEvents(
+      Stream<PopularPostEvent> events,
+      Stream<PopularPostState> Function(PopularPostEvent event) next,
       ) {
     return super.transformEvents(
       events.debounceTime(
@@ -26,46 +26,46 @@ class PostBloc extends Bloc<PostEvent, PostState> {
   }
 
   @override
-  get initialState => PostUninitialized();
+  get initialState => PopularPostUninitialized();
 
   @override
-  Stream<PostState> mapEventToState(event) async* {
+  Stream<PopularPostState> mapEventToState(event) async* {
     final currentState = state;
-    if (event is Fetch && !_hasReachedMax(currentState)) {
+    if (event is FetchPopular && !_hasReachedMax(currentState)) {
       try {
-        if (currentState is PostUninitialized) {
+        if (currentState is PopularPostUninitialized) {
           final postsAndLastDoc = await _fetchPosts(null, 4);
-          yield PostLoaded(posts: postsAndLastDoc[0], hasReachedMax: false, lastDoc: postsAndLastDoc[1]);
+          yield PopularPostLoaded(posts: postsAndLastDoc[0], hasReachedMax: false, lastDoc: postsAndLastDoc[1]);
         }
-        if (currentState is PostLoaded) {
+        if (currentState is PopularPostLoaded) {
           final postsAndLastDoc = await _fetchPosts(currentState.lastDoc, 4);
           yield postsAndLastDoc[0].isEmpty
               ? currentState.copyWith(hasReachedMax: true)
-              : PostLoaded(
+              : PopularPostLoaded(
               posts: currentState.posts + postsAndLastDoc[0], hasReachedMax: false, lastDoc : postsAndLastDoc[1]);
         }
       } catch (_) {
-        yield PostError();
+        yield PopularPostError();
       }
     }
 
-    if(event is Refresh){
+    if(event is RefreshPopular){
       try {
         final postsAndLastDoc = await _fetchPosts(null, 4);
-        yield PostLoaded(posts: postsAndLastDoc[0], hasReachedMax: false, lastDoc: null);
+        yield PopularPostLoaded(posts: postsAndLastDoc[0], hasReachedMax: false, lastDoc: null);
       }  catch (e) {
-        yield PostError();
+        yield PopularPostError();
       }
     }
   }
 
-  bool _hasReachedMax(PostState state) =>
-      state is PostLoaded && state.hasReachedMax;
+  bool _hasReachedMax(PopularPostState state) =>
+      state is PopularPostLoaded && state.hasReachedMax;
 
   _fetchPosts(DocumentSnapshot lastDoc, int limit) async {
 
     print("fetching posts");
-    final postsAndLastDoc = await db.getRecentPosts(lastDoc, limit);
+    final postsAndLastDoc = await db.getPopularPosts(lastDoc, limit);
     print("postsandlastdoc: $postsAndLastDoc");
     return postsAndLastDoc;
 
