@@ -72,13 +72,13 @@ class PostWidget extends StatelessWidget {
           ),
 
           Center(
-              child: Text(
-                imagePost.title,
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold
-                ),
-              )
+            child: Text(
+              imagePost.title,
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold
+              ),
+            )
           ),
 
 
@@ -97,13 +97,18 @@ class PostWidget extends StatelessWidget {
           ),
 
           Container(
-              alignment: Alignment(-0.8, 0),
-              margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-              child: Text(imagePost.post, style: TextStyle(fontSize: 14),)),
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+            child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(imagePost.post, style: TextStyle(fontSize: 14),))
+          ),
 
           SizedBox(
             height: 10,
           ),
+
+
+
 
 
         ],
